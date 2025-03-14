@@ -56,12 +56,12 @@ namespace Payem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,TotalAmount")] PaymentList paymentList)
         {
-            if (ModelState.IsValid)
-            {
+          //if (ModelState.IsValid)
+           //
                 _context.Add(paymentList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+           //
             return View(paymentList);
         }
 
