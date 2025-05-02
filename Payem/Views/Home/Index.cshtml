@@ -37,45 +37,79 @@
             </div>
         </div>
     </div>
+
+    <!-- Holiday Calendar -->
+    <div class="mt-5">
+        <h3>Upcoming Holidays</h3>
+        <div id="holiday-calendar"></div>
+    </div>
+
+    <!-- Footer with Thanks message -->
+    <div class="footer mt-5">
+        <p class="thanks-message">Thanks to you, our website is still going strong! Thank You!</p>
+    </div>
 </div>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <script>
-        $("#aboutUsBtn").click(function() {
+        $("#aboutUsBtn").click(function () {
             $("#aboutUsText").slideToggle("slow");
-
-            createDollarSigns(); 
+            createDollarSigns();
         });
 
         function createDollarSigns() {
-            for (let i = 0; i < 5; i++) { 
-                var dollarSign = $('<div class="dollar-sign">$</div>'); 
-                $("body").append(dollarSign); 
+            for (let i = 0; i < 5; i++) {
+                var dollarSign = $('<div class="dollar-sign">$</div>');
+                $("body").append(dollarSign);
 
                 dollarSign.css({
                     position: 'absolute',
-                    left: ($('#aboutUsBtn').offset().left + Math.random() * 200 - 100) + 'px', 
-                    top: ($('#aboutUsBtn').offset().top + Math.random() * 150 - 75) + 'px',  
+                    left: ($('#aboutUsBtn').offset().left + Math.random() * 200 - 100) + 'px',
+                    top: ($('#aboutUsBtn').offset().top + Math.random() * 150 - 75) + 'px',
                     fontSize: '24px',
-                    color: '#28a745', 
+                    color: '#28a745',
                     opacity: 0,
                 });
 
                 dollarSign.animate({
-                    opacity: 1, 
-                    top: '-=50px' 
-                }, 800, function() {
-                    
+                    opacity: 1,
+                    top: '-=50px'
+                }, 800, function () {
                     $(this).animate({
-                        opacity: 0, 
-                        top: '-=50px' 
-                    }, 800, function() {
-                        $(this).remove(); 
+                        opacity: 0,
+                        top: '-=50px'
+                    }, 800, function () {
+                        $(this).remove();
                     });
                 });
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('holiday-calendar');
+
+            const today = new Date().toISOString().split('T')[0];
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: 500,
+                events: [
+                    { title: 'Today', date: today, color: '#28a745' },
+                    { title: 'New Year\'s Day', date: '2025-01-01', color: '#dc3545' },
+                    { title: 'Easter Sunday', date: '2025-04-20', color: '#ffc107' },
+                    { title: 'Labour Day', date: '2025-05-01', color: '#0d6efd' },
+                    { title: 'Black Friday', date: '2025-11-28', color: '#000000', textColor: '#ffffff' },
+                    { title: 'Christmas Eve', date: '2025-12-24', color: '#6f42c1' },
+                    { title: 'Christmas Day', date: '2025-12-25', color: '#6f42c1' },
+                    { title: 'Boxing Day', date: '2025-12-26', color: '#6f42c1' },
+                    { title: 'New Year\'s Eve', date: '2025-12-31', color: '#fd7e14' }
+                ]
+            });
+
+            calendar.render();
+        });
     </script>
 }
 
@@ -92,14 +126,59 @@
     .btn-success {
         padding: 12px 20px;
         font-size: 18px;
-        position: relative; 
+        position: relative;
+        background-color: #28a745;
+        color: white;
+        border-radius: 25px;
+        border: none;
+        transition: all 0.3s ease;
     }
+
+        .btn-success:hover {
+            background-color: #218838;
+            cursor: pointer;
+        }
 
     .dollar-sign {
         font-size: 24px;
         font-weight: bold;
-        color: #28a745; 
+        color: #28a745;
         opacity: 1;
-        transition: all 1s ease; 
+        transition: all 1s ease;
+    }
+
+    /* Holiday calendar styling */
+    #holiday-calendar {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Footer styles */
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .thanks-message {
+        color: #218838;
+        font-weight: bold;
+    }
+
+    /* Calendar day styles */
+    .fc .fc-col-header-cell-cushion {
+        color: #28a745 !important;
+        font-weight: bold;
+    }
+
+    .fc .fc-daygrid-day-number {
+        color: #28a745 !important;
+        font-weight: 600;
     }
 </style>
+
