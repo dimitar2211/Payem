@@ -12,6 +12,7 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<Product> Products { get; set; }
     public DbSet<PaymentList> PaymentList { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
-   // public DbSet<Payem.Models.PaymentList> PaymentList { get; set; } = default!;
+    // public DbSet<Payem.Models.PaymentList> PaymentList { get; set; } = default!;
 }
