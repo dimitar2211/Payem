@@ -3,6 +3,7 @@
 }
 
 <div class="container text-center">
+    <h1 class="welcome-heading">WELCOME!</h1>
     <button id="aboutUsBtn" class="btn btn-success mt-5">Hello!</button>
 
     <div id="aboutUsText" class="mt-3" style="display:none;">
@@ -117,25 +118,39 @@
     .feature-box {
         text-align: center;
         margin-bottom: 20px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
 
     .container {
         margin-top: 50px;
+        padding: 30px;
+        background: linear-gradient(to right, #e9f5ee, #ffffff);
+        border-radius: 30px;
     }
 
     .btn-success {
-        padding: 12px 20px;
+        padding: 14px 28px;
         font-size: 18px;
-        position: relative;
         background-color: #28a745;
         color: white;
-        border-radius: 25px;
         border: none;
-        transition: all 0.3s ease;
+        border-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
         .btn-success:hover {
             background-color: #218838;
+            transform: scale(1.05);
             cursor: pointer;
         }
 
@@ -145,40 +160,55 @@
         color: #28a745;
         opacity: 1;
         transition: all 1s ease;
+        pointer-events: none;
     }
 
-    /* Holiday calendar styling */
     #holiday-calendar {
         max-width: 900px;
         margin: 0 auto;
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* Footer styles */
     .footer {
         text-align: center;
-        margin-top: 50px;
-        font-size: 1rem;
+        margin-top: 60px;
+        padding: 15px 0;
+        font-size: 1.1rem;
         color: #333;
+        background: #f0fdf4;
+        border-radius: 20px;
     }
 
     .thanks-message {
-        color: #218838;
+        color: #28a745;
         font-weight: bold;
     }
 
-    /* Calendar day styles */
-    .fc .fc-col-header-cell-cushion {
-        color: #28a745 !important;
-        font-weight: bold;
-    }
-
+    .fc .fc-col-header-cell-cushion,
     .fc .fc-daygrid-day-number {
         color: #28a745 !important;
         font-weight: 600;
     }
-</style>
 
+    h3, h4, h5 {
+        border-bottom: 2px solid #28a745;
+        display: inline-block;
+        padding-bottom: 4px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .welcome-heading {
+        font-size: 48px;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
