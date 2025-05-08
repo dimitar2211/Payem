@@ -1,49 +1,139 @@
-﻿@model List<Payem.Models.Message>  
-
+﻿@model List<Payem.Models.Message>
 
 @{
     ViewData["Title"] = "Messages";
 }
 
-<div class="container mt-5">
-    <h2>Messages</h2>
+<style>
+    .messages-container {
+        background-color: white;
+        padding: 40px;
+        max-width: 800px;
+        margin: 50px auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 128, 0, 0.08);
+        font-family: 'Segoe UI', sans-serif;
+        color: #2e2e2e;
+    }
 
+    .messages-title {
+        font-size: 2rem;
+        color: #2e7d32;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #a5d6a7;
+        padding-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #2e7d32;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+    }
+
+    .btn-send-message {
+        background-color: #43a047;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+        .btn-send-message:hover {
+            background-color: #388e3c;
+        }
+
+    .message-card {
+        background-color: #f1f8e9;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+    }
+
+    .message-card-title {
+        font-size: 1.25rem;
+        color: #2e7d32;
+        margin-bottom: 10px;
+    }
+
+    .message-card-text {
+        color: #2e2e2e;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .message-card-footer {
+        font-size: 0.9rem;
+        color: #757575;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .message-card-footer button {
+            background-color: #a5d6a7;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+            .message-card-footer button:hover {
+                background-color: #81c784;
+            }
+
+        .message-card-footer .message-time {
+            font-style: italic;
+        }
+</style>
+
+<div class="messages-container">
+    <h2 class="messages-title">@ViewData["Title"]</h2>
+
+    <!-- Message Sending Form -->
     <form method="post" asp-action="SendMessage">
         <div class="form-group">
             <label for="name">Your Name (optional):</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name (optional)" />
         </div>
+
         <div class="form-group">
             <label for="content">Your Message:</label>
             <textarea id="content" name="content" class="form-control" placeholder="Type your message here..." rows="4"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Send Message</button>
+
+        <button type="submit" class="btn-send-message">Send Message</button>
     </form>
 
     <h3 class="mt-5">All Messages</h3>
+
     @foreach (var message in Model)
     {
-        <div class="card my-3">
-            <div class="card-body">
-                <h5 class="card-title">@message.Name</h5>
-                <p class="card-text">@message.Content</p>
-                <p class="text-muted small">@message.CreatedAt.ToString("g")</p>
+        <div class="message-card">
+            <h5 class="message-card-title">@message.Name</h5>
+            <p class="message-card-text">@message.Content</p>
+            <div class="message-card-footer">
+                <span class="message-time">@message.CreatedAt.ToString("g")</span>
                 <form method="post" asp-action="LikeMessage" class="d-inline">
                     <input type="hidden" name="messageId" value="@message.Id" />
-                    <button type="submit" class="btn btn-sm btn-outline-success">Like (@message.Likes)</button>
+                    <button type="submit">Like (@message.Likes)</button>
                 </form>
             </div>
         </div>
     }
-
 </div>
-<style>
-    .message-footer {
-        margin-top: 10px;
-        font-size: 14px;
-    }
-
-    .message-footer button {
-     margin-left: 10px;
-        }
-</style>

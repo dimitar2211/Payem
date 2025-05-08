@@ -4,37 +4,89 @@
     ViewBag.Title = "Create Payment List";
 }
 
-<h2>Create Payment List</h2>
+<style>
+    .form-container {
+        background-color: white;
+        padding: 40px;
+        max-width: 700px;
+        margin: 50px auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 128, 0, 0.08);
+        font-family: 'Segoe UI', sans-serif;
+        color: #2e2e2e;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    .form-title {
+        font-size: 2rem;
+        color: #2e7d32;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #a5d6a7;
+        padding-bottom: 10px;
+    }
 
-    <div class="form-horizontal">
-        <h4>Payment List</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+        color: #2e7d32;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .validation-message {
+        color: #c62828;
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+
+    .submit-btn {
+        background-color: #43a047;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .submit-btn:hover {
+            background-color: #388e3c;
+        }
+</style>
+
+<div class="form-container">
+    <h2 class="form-title">@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "validation-message" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalAmount)
-                @Html.ValidationMessageFor(model => model.TotalAmount)
-            </div>
+            @Html.LabelFor(model => model.TotalAmount)
+            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "validation-message" })
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+        <button type="submit" class="submit-btn">Create</button>
+    }
+</div>

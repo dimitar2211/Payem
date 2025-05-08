@@ -4,36 +4,116 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<style>
+    .edit-container {
+        background-color: white;
+        padding: 40px;
+        max-width: 700px;
+        margin: 50px auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 128, 0, 0.08);
+        font-family: 'Segoe UI', sans-serif;
+        color: #2e2e2e;
+    }
 
-<h4>PaymentList</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalAmount" class="control-label"></label>
-                <input asp-for="TotalAmount" class="form-control" />
-                <span asp-validation-for="TotalAmount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    .edit-title {
+        font-size: 2rem;
+        color: #2e7d32;
+        margin-bottom: 20px;
+    }
+
+    .edit-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        color: #555;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #2e7d32;
+        margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .validation-message {
+        color: #c62828;
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+
+    .submit-btn {
+        background-color: #43a047;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .submit-btn:hover {
+            background-color: #388e3c;
+        }
+
+    .back-link {
+        color: #2e7d32;
+        font-weight: 500;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="edit-container">
+    <h1 class="edit-title">@ViewData["Title"]</h1>
+
+    <p class="edit-subtitle">Edit the details of your payment list:</p>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="validation-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TotalAmount"></label>
+            <input asp-for="TotalAmount" class="form-control" />
+            <span asp-validation-for="TotalAmount" class="validation-message"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="submit-btn" />
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index" class="back-link">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
